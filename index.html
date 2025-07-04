@@ -1,4 +1,4 @@
-<!-- Main Content -->
+  <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 py-6">
         <!-- User View -->
         <div id="userView" class="block">
@@ -18,42 +18,42 @@
                 <div class="bg-white rounded-lg shadow-md p-4 mb-6">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecione seu perfil</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="1" data-name="Ariadne">
+                        <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="1" data-name="Ariadne">
                             <div class="flex flex-col items-center">
                                 <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">AR</div>
                                 <span class="font-medium">Ariadne</span>
                             </div>
-                        </button>
-                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="2" data-name="Delcio">
+                        </div>
+                        <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="2" data-name="Delcio">
                             <div class="flex flex-col items-center">
                                 <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">DE</div>
                                 <span class="font-medium">Delcio</span>
                             </div>
-                        </button>
-                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="3" data-name="Lorran">
+                        </div>
+                        <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="3" data-name="Lorran">
                             <div class="flex flex-col items-center">
                                 <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">LO</div>
                                 <span class="font-medium">Lorran</span>
                             </div>
-                        </button>
-                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="4" data-name="Suelen Lemos">
+                        </div>
+                        <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="4" data-name="Suelen Lemos">
                             <div class="flex flex-col items-center">
                                 <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SL</div>
                                 <span class="font-medium">Suelen Lemos</span>
                             </div>
-                        </button>
-                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="5" data-name="Suelen Soares">
+                        </div>
+                        <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="5" data-name="Suelen Soares">
                             <div class="flex flex-col items-center">
                                 <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SS</div>
                                 <span class="font-medium">Suelen Soares</span>
                             </div>
-                        </button>
-                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="6" data-name="Priscila">
+                        </div>
+                        <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="6" data-name="Priscila">
                             <div class="flex flex-col items-center">
                                 <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">PR</div>
                                 <span class="font-medium">Priscila</span>
                             </div>
-                        </button>
+                        </div>
                     </div>
                 </div>
 
@@ -670,8 +670,8 @@
 
         // User selection
         const userSelects = document.querySelectorAll('.user-select');
-        userSelects.forEach(button => {
-            button.addEventListener('click', function() {
+        userSelects.forEach(userSelect => {
+            userSelect.addEventListener('click', function() {
                 const userId = parseInt(this.dataset.id);
                 const userName = this.dataset.name;
                 
