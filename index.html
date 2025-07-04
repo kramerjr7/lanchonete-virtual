@@ -8,7 +8,6 @@
   <link rel="icon" href="favicon.ico" />
 </head>
 <body class="bg-white min-h-screen flex flex-col">
-
   <!-- Navegação e logo -->
   <header class="w-full text-center py-6">
     <img src="logo.svg" alt="Logo Tubarões Famintos" class="mx-auto w-24 h-auto mb-2" />
@@ -24,7 +23,74 @@
 
   <!-- Conteúdo principal -->
   <main class="flex-grow container mx-auto px-4 py-6">
-    <!-- Cole aqui seu código HTML principal existente -->
+    <!-- User View -->
+    <div id="userView">
+      <!-- Título e saldo -->
+      <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-800" id="welcomeMessage">Bem-vindo!</h2>
+            <p class="text-gray-600">Selecione seu perfil para ver seu saldo</p>
+          </div>
+          <div class="bg-sky-100 text-sky-800 font-bold py-2 px-4 rounded-lg">
+            Saldo: R$ <span id="userBalance">0,00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seleção de perfil -->
+      <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecione seu perfil</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <!-- Cada perfil -->
+          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="1" data-name="Ariadne">
+            <div class="flex flex-col items-center">
+              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">AR</div>
+              <span class="font-medium">Ariadne</span>
+            </div>
+          </div>
+          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="2" data-name="Delcio">
+            <div class="flex flex-col items-center">
+              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">DE</div>
+              <span class="font-medium">Delcio</span>
+            </div>
+          </div>
+          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="3" data-name="Lorran">
+            <div class="flex flex-col items-center">
+              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">LO</div>
+              <span class="font-medium">Lorran</span>
+            </div>
+          </div>
+          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="4" data-name="Suelen Lemos">
+            <div class="flex flex-col items-center">
+              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SL</div>
+              <span class="font-medium">Suelen Lemos</span>
+            </div>
+          </div>
+          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="5" data-name="Suelen Soares">
+            <div class="flex flex-col items-center">
+              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SS</div>
+              <span class="font-medium">Suelen Soares</span>
+            </div>
+          </div>
+          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="6" data-name="Priscila">
+            <div class="flex flex-col items-center">
+              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">PR</div>
+              <span class="font-medium">Priscila</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aqui pode continuar o seu menu, carrinho, produtos etc.  -->
+      <p class="text-center text-gray-500">(Conteúdo do funcionário aqui...)</p>
+    </div>
+
+    <!-- Admin View -->
+    <div id="adminView" class="hidden">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Painel Administrativo</h2>
+      <p class="text-gray-500 text-center">(Conteúdo do admin aqui...)</p>
+    </div>
   </main>
 
   <!-- Rodapé -->
@@ -36,8 +102,29 @@
 
   <!-- Scripts -->
   <script>
-    // Cole aqui seu código JavaScript existente
-  </script>
+    // Botões de navegação
+    const userBtn  = document.getElementById('userBtn');
+    const adminBtn = document.getElementById('adminBtn');
+    const userView = document.getElementById('userView');
+    const adminView = document.getElementById('adminView');
 
+    userBtn.addEventListener('click', () => {
+      userView.classList.remove('hidden');
+      adminView.classList.add('hidden');
+      userBtn.classList.add('bg-sky-800');
+      userBtn.classList.remove('bg-sky-700');
+      adminBtn.classList.add('bg-sky-700');
+      adminBtn.classList.remove('bg-sky-800');
+    });
+
+    adminBtn.addEventListener('click', () => {
+      adminView.classList.remove('hidden');
+      userView.classList.add('hidden');
+      adminBtn.classList.add('bg-sky-800');
+      adminBtn.classList.remove('bg-sky-700');
+      userBtn.classList.add('bg-sky-700');
+      userBtn.classList.remove('bg-sky-800');
+    });
+  </script>
 </body>
 </html>
