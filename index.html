@@ -3,141 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lanchonete Virtual - Tubarões Famintos</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {},
-      }
-    }
-  </script>
+  <title>Cardápio Tubarões Famintos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
-  <main class="flex-grow container mx-auto px-4 py-6">
-    <div id="userView" class="block">
-      <div class="mb-6">
-        <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-          <div class="flex items-center justify-between">
-            <div>
-              <h2 class="text-xl font-semibold text-gray-800" id="welcomeMessage">Bem-vindo!</h2>
-              <p class="text-gray-600">Selecione seu perfil para ver seu saldo</p>
-            </div>
-            <div class="bg-sky-100 text-sky-800 font-bold py-2 px-4 rounded-lg">
-              Saldo: R$ <span id="userBalance">0,00</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecione seu perfil</h2>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            <!-- Perfis dos usuários -->
-            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="1" data-name="Ariadne">
-              <div class="flex flex-col items-center">
-                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">AR</div>
-                <span class="font-medium">Ariadne</span>
-              </div>
-            </button>
-            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="2" data-name="Delcio">
-              <div class="flex flex-col items-center">
-                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">DE</div>
-                <span class="font-medium">Delcio</span>
-              </div>
-            </button>
-            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="3" data-name="Lorran">
-              <div class="flex flex-col items-center">
-                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">LO</div>
-                <span class="font-medium">Lorran</span>
-              </div>
-            </button>
-            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="4" data-name="Suelen Lemos">
-              <div class="flex flex-col items-center">
-                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SL</div>
-                <span class="font-medium">Suelen Lemos</span>
-              </div>
-            </button>
-            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="5" data-name="Suelen Soares">
-              <div class="flex flex-col items-center">
-                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SS</div>
-                <span class="font-medium">Suelen Soares</span>
-              </div>
-            </button>
-            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="6" data-name="Priscila">
-              <div class="flex flex-col items-center">
-                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">PR</div>
-                <span class="font-medium">Priscila</span>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        <div id="productLimitsAlert" class="hidden bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded-md">
-          <div class="flex items-start">
-            <div class="flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-              </svg>
-            </div>
-            <div class="ml-3">
-              <h3 class="text-sm font-medium text-amber-800">Atenção: Produtos com limite por funcionário</h3>
-              <div class="mt-2 text-sm text-amber-700">
-                <p>Olá <span id="alertUserName">funcionário</span>, lembre-se que os produtos possuem limites de quantidade por funcionário:</p>
-                <ul class="list-disc pl-5 mt-1 space-y-1" id="productLimitsList">
-                  <li>1 Refrigerante</li>
-                  <li>1 Salgadinho</li>
-                  <li>1 Doce</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="productSection" class="hidden bg-white rounded-lg shadow-md p-4">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">Produtos disponíveis</h2>
-          <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <li class="border p-3 rounded-md">
-              <h3 class="text-lg font-bold">Refrigerante</h3>
-              <p class="text-gray-600">R$ 6,00</p>
-              <button class="mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700">Adicionar</button>
-            </li>
-            <li class="border p-3 rounded-md">
-              <h3 class="text-lg font-bold">Salgadinho</h3>
-              <p class="text-gray-600">R$ 5,00</p>
-              <button class="mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700">Adicionar</button>
-            </li>
-            <li class="border p-3 rounded-md">
-              <h3 class="text-lg font-bold">Doce</h3>
-              <p class="text-gray-600">R$ 3,00</p>
-              <button class="mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700">Adicionar</button>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </main>
-
-  <footer class="bg-sky-800 text-white py-4">
-    <div class="container mx-auto px-4 text-center">
-      <p>&copy; 2023 Tubarões Famintos - Lanchonete Virtual</p>
-    </div>
-  </footer>
+<body class="bg-gray-100 p-6">
+  <div class="container mx-auto">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <li class="border p-3 rounded-md">
+        <h3 class="text-lg font-bold">Amendoim</h3>
+        <p class="text-gray-600">R$ 1,00</p>
+        <p class="text-sm text-gray-500">Estoque: <span id="stock-Amendoim">20</span></p>
+        <input type="number" min="1" class="repor-input border rounded px-2 py-1 mt-1 w-full" data-name="Amendoim" placeholder="Repor estoque" />
+        <button class="add-to-cart mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700" data-name="Amendoim" data-price="1.00">Adicionar</button>
+      </li>
+      <li class="border p-3 rounded-md">
+        <h3 class="text-lg font-bold">Club Social UN</h3>
+        <p class="text-gray-600">R$ 1,00</p>
+        <p class="text-sm text-gray-500">Estoque: <span id="stock-Club Social UN">24</span></p>
+        <input type="number" min="1" class="repor-input border rounded px-2 py-1 mt-1 w-full" data-name="Club Social UN" placeholder="Repor estoque" />
+        <button class="add-to-cart mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700" data-name="Club Social UN" data-price="1.00">Adicionar</button>
+      </li>
+      <li class="border p-3 rounded-md">
+        <h3 class="text-lg font-bold">Moranguete</h3>
+        <p class="text-gray-600">R$ 1,00</p>
+        <p class="text-sm text-gray-500">Estoque: <span id="stock-Moranguete">46</span></p>
+        <input type="number" min="1" class="repor-input border rounded px-2 py-1 mt-1 w-full" data-name="Moranguete" placeholder="Repor estoque" />
+        <button class="add-to-cart mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700" data-name="Moranguete" data-price="1.00">Adicionar</button>
+      </li>
+      <li class="border p-3 rounded-md">
+        <h3 class="text-lg font-bold">Paçoquinha</h3>
+        <p class="text-gray-600">R$ 1,00</p>
+        <p class="text-sm text-gray-500">Estoque: <span id="stock-Paçoquinha">50</span></p>
+        <input type="number" min="1" class="repor-input border rounded px-2 py-1 mt-1 w-full" data-name="Paçoquinha" placeholder="Repor estoque" />
+        <button class="add-to-cart mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700" data-name="Paçoquinha" data-price="1.00">Adicionar</button>
+      </li>
+      <li class="border p-3 rounded-md">
+        <h3 class="text-lg font-bold">Gominha</h3>
+        <p class="text-gray-600">R$ 1,00</p>
+        <p class="text-sm text-gray-500">Estoque: <span id="stock-Gominha">30</span></p>
+        <input type="number" min="1" class="repor-input border rounded px-2 py-1 mt-1 w-full" data-name="Gominha" placeholder="Repor estoque" />
+        <button class="add-to-cart mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700" data-name="Gominha" data-price="1.00">Adicionar</button>
+      </li>
+      <li class="border p-3 rounded-md">
+        <h3 class="text-lg font-bold">Coca Cola</h3>
+        <p class="text-gray-600">R$ 1,20</p>
+        <p class="text-sm text-gray-500">Estoque: <span id="stock-Coca Cola">24</span></p>
+        <input type="number" min="1" class="repor-input border rounded px-2 py-1 mt-1 w-full" data-name="Coca Cola" placeholder="Repor estoque" />
+        <button class="add-to-cart mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700" data-name="Coca Cola" data-price="1.20">Adicionar</button>
+      </li>
+    </ul>
+  </div>
 
   <script>
-    document.querySelectorAll('.user-select').forEach(button => {
-      button.addEventListener('click', () => {
-        const userName = button.dataset.name;
-        const userBalance = (Math.random() * 20).toFixed(2);
+    const estoque = {
+      'Amendoim': 20,
+      'Paçoquinha': 50,
+      'Moranguete': 46,
+      'Gominha': 30,
+      'Club Social UN': 24,
+      'Coca Cola': 24
+    };
 
-        document.getElementById('welcomeMessage').textContent = `Bem-vindo, ${userName}!`;
-        document.getElementById('userBalance').textContent = userBalance;
-        document.getElementById('alertUserName').textContent = userName;
-        document.getElementById('productLimitsAlert').classList.remove('hidden');
-        document.getElementById('productSection').classList.remove('hidden');
+    let cart = [];
+
+    function updateCart() {
+      console.log('Cart:', cart);
+    }
+
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', () => {
+        const name = button.dataset.name;
+        const price = parseFloat(button.dataset.price);
+        const stockEl = document.getElementById(`stock-${name}`);
+
+        if (estoque[name] <= 0) {
+          alert(`${name} está esgotado.`);
+          return;
+        }
+
+        if (cart.some(item => item.name === name)) {
+          alert(`Você só pode adicionar 1 unidade de ${name}.`);
+          return;
+        }
+
+        estoque[name]--;
+        stockEl.textContent = estoque[name];
+
+        cart.push({ name, price });
+        updateCart();
+      });
+    });
+
+    document.querySelectorAll('.repor-input').forEach(input => {
+      input.addEventListener('change', () => {
+        const name = input.dataset.name;
+        const addQtd = parseInt(input.value);
+        if (!isNaN(addQtd) && addQtd > 0) {
+          estoque[name] += addQtd;
+          document.getElementById(`stock-${name}`).textContent = estoque[name];
+          input.value = '';
+          alert(`Estoque de ${name} atualizado!`);
+        }
       });
     });
   </script>
 </body>
 </html>
-
