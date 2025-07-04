@@ -1,18 +1,284 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lanchonete Virtual - Tubarões Famintos</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-
-  <!-- Conteúdo copiado do usuário -->
   <main class="flex-grow container mx-auto px-4 py-6">
-    <h1 class="text-2xl font-bold text-sky-800">Lanchonete Virtual</h1>
-    <p class="mt-4">Seu conteúdo está aqui!</p>
+    <div id="userView" class="block">
+      <div class="mb-6">
+        <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-800" id="welcomeMessage">Bem-vindo!</h2>
+              <p class="text-gray-600">Selecione seu perfil para ver seu saldo</p>
+            </div>
+            <div class="bg-sky-100 text-sky-800 font-bold py-2 px-4 rounded-lg">
+              Saldo: R$ <span id="userBalance">0,00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecione seu perfil</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="1" data-name="Ariadne">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">AR</div>
+                <span class="font-medium">Ariadne</span>
+              </div>
+            </button>
+            <!-- Outros perfis... -->
+          </div>
+        </div>
+        
+        <!-- Aqui viriam todos os cards de produtos, carrinho e seções adicionais -->
+        
+      </div>
+    </div>
   </main>
+
+  <footer class="bg-sky-800 text-white py-4">
+    <div class="container mx-auto px-4 text-center">
+      <p>&copy; 2023 Tubarões Famintos - Lanchonete Virtual</p>
+    </div>
+  </footer>
+
+  <!-- Aqui vai o seu <script> JS completo -->
 
 </body>
 </html>
+<!-- Product Limits Alert -->
+<div id="productLimitsAlert" class="hidden bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded-md">
+  <div class="flex items-start">
+    <div class="flex-shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="ml-3">
+      <h3 class="text-sm font-medium text-amber-800">Atenção: Produtos com limite por funcionário</h3>
+      <div class="mt-2 text-sm text-amber-700">
+        <p>Olá <span id="alertUserName">funcionário</span>, lembre-se que os produtos possuem limites de quantidade por funcionário:</p>
+        <ul class="list-disc pl-5 mt-1 space-y-1" id="productLimitsList">
+          <!-- Limites serão inseridos via JS -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Menu Section -->
+<div id="menuSection" class="hidden">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">Cardápio</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <div class="h-32 bg-yellow-100 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" />
+        </svg>
+      </div>
+      <div class="p-4">
+        <div class="flex justify-between items-center mb-1">
+          <h4 class="font-semibold text-lg">Amendoim</h4>
+          <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full" id="stock-1">Estoque: 0/3</span>
+        </div>
+        <p class="text-gray-600 text-sm mb-3">Pacote de amendoim torrado</p>
+        <div class="flex justify-between items-center">
+          <span class="font-bold text-sky-700">R$ 1,00</span>
+          <button class="add-to-cart bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition" data-id="1" data-name="Amendoim" data-price="1.00" data-stock="3">
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Adicione aqui os outros produtos seguindo o mesmo padrão... -->
+  </div>
+</div>
+
+<!-- Cart Section -->
+<div id="cartSection" class="hidden bg-white rounded-lg shadow-md p-4 mt-6">
+  <h2 class="text-xl font-semibold text-gray-800 mb-4">Seu Pedido</h2>
+  <div id="cartItems" class="mb-4">
+    <div class="text-gray-500 text-center py-6">Seu carrinho está vazio</div>
+  </div>
+  <div class="border-t pt-4">
+    <div class="flex justify-between mb-2">
+      <span class="font-medium">Subtotal:</span>
+      <span id="subtotal">R$ 0,00</span>
+    </div>
+    <div class="flex justify-between mb-4">
+      <span class="font-bold">Total:</span>
+      <span id="total" class="font-bold text-sky-700">R$ 0,00</span>
+    </div>
+    <div class="flex justify-between">
+      <button id="clearCart" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition">
+        Limpar
+      </button>
+      <button id="checkoutBtn" class="bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 rounded-lg transition flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+        </svg>
+        Finalizar Pedido
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const users = [
+    { id: 1, name: "Ariadne", balance: 40.00 },
+    { id: 2, name: "Delcio", balance: 40.00 },
+    { id: 3, name: "Lorran", balance: 40.00 },
+    { id: 4, name: "Suelen Lemos", balance: 40.00 },
+    { id: 5, name: "Suelen Soares", balance: 40.00 },
+    { id: 6, name: "Priscila", balance: 40.00 }
+  ];
+
+  const products = [
+    { id: 1, name: "Amendoim", price: 1.00, limitPerUser: 3 },
+    { id: 2, name: "Club Social", price: 1.00, limitPerUser: 4 },
+    { id: 3, name: "Moranguete", price: 1.00, limitPerUser: 7 },
+    { id: 4, name: "Paçoquinha", price: 1.00, limitPerUser: 8 },
+    { id: 5, name: "Gominha", price: 1.00, limitPerUser: 5 },
+    { id: 6, name: "Coca Cola", price: 1.20, limitPerUser: 4 }
+  ];
+
+  let currentUser = null;
+  let cart = [];
+
+  const userButtons = document.querySelectorAll('.user-select');
+  const balanceDisplay = document.getElementById('userBalance');
+  const welcomeMsg = document.getElementById('welcomeMessage');
+  const menuSection = document.getElementById('menuSection');
+  const cartSection = document.getElementById('cartSection');
+  const alertUserName = document.getElementById('alertUserName');
+  const productLimitsList = document.getElementById('productLimitsList');
+  const productLimitsAlert = document.getElementById('productLimitsAlert');
+
+  const cartItemsEl = document.getElementById('cartItems');
+  const subtotalEl = document.getElementById('subtotal');
+  const totalEl = document.getElementById('total');
+
+  function updateCartDisplay() {
+    if (cart.length === 0) {
+      cartItemsEl.innerHTML = '<div class="text-gray-500 text-center py-6">Seu carrinho está vazio</div>';
+      subtotalEl.textContent = 'R$ 0,00';
+      totalEl.textContent = 'R$ 0,00';
+      return;
+    }
+
+    let html = '';
+    let subtotal = 0;
+
+    cart.forEach(item => {
+      const total = item.price * item.quantity;
+      subtotal += total;
+      html += `
+        <div class="flex justify-between items-center py-2 border-b">
+          <div>
+            <h4 class="font-medium">${item.name}</h4>
+            <p class="text-sm text-gray-600">R$ ${item.price.toFixed(2).replace('.', ',')} x ${item.quantity}</p>
+          </div>
+          <div class="flex items-center">
+            <span class="font-medium mr-2">R$ ${total.toFixed(2).replace('.', ',')}</span>
+            <button class="remove-item text-red-500 hover:text-red-700" data-id="${item.id}">x</button>
+          </div>
+        </div>
+      `;
+    });
+
+    cartItemsEl.innerHTML = html;
+    subtotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    totalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+
+    // Eventos para remover item
+    document.querySelectorAll('.remove-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = parseInt(btn.dataset.id);
+        cart = cart.filter(i => i.id !== id);
+        updateCartDisplay();
+      });
+    });
+  }
+
+  userButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const userId = parseInt(btn.dataset.id);
+      const user = users.find(u => u.id === userId);
+      currentUser = user;
+      welcomeMsg.textContent = `Bem-vindo, ${user.name}!`;
+      balanceDisplay.textContent = user.balance.toFixed(2).replace('.', ',');
+      menuSection.classList.remove('hidden');
+      cartSection.classList.remove('hidden');
+
+      // Mostrar alerta de limites
+      alertUserName.textContent = user.name;
+      productLimitsList.innerHTML = '';
+      products.forEach(p => {
+        const li = document.createElement('li');
+        li.textContent = `${p.name}: ${p.limitPerUser} unidades`;
+        productLimitsList.appendChild(li);
+      });
+      productLimitsAlert.classList.remove('hidden');
+      setTimeout(() => productLimitsAlert.classList.add('hidden'), 8000);
+
+      // Resetar carrinho
+      cart = [];
+      updateCartDisplay();
+    });
+  });
+
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!currentUser) return alert('Selecione seu perfil primeiro');
+
+      const id = parseInt(btn.dataset.id);
+      const name = btn.dataset.name;
+      const price = parseFloat(btn.dataset.price);
+      const limit = parseInt(btn.dataset.stock);
+
+      const cartItem = cart.find(i => i.id === id);
+      const quantity = cartItem ? cartItem.quantity + 1 : 1;
+
+      if (quantity > limit) {
+        alert(`Limite de ${limit} unidades de ${name} atingido para seu perfil.`);
+        return;
+      }
+
+      if (cartItem) {
+        cartItem.quantity++;
+      } else {
+        cart.push({ id, name, price, quantity: 1 });
+      }
+
+      updateCartDisplay();
+    });
+  });
+
+  document.getElementById('clearCart').addEventListener('click', () => {
+    cart = [];
+    updateCartDisplay();
+  });
+
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    if (!currentUser) return;
+    const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+    if (total > currentUser.balance) {
+      alert('Saldo insuficiente');
+      return;
+    }
+
+    currentUser.balance -= total;
+    balanceDisplay.textContent = currentUser.balance.toFixed(2).replace('.', ',');
+    alert('Pedido realizado com sucesso!');
+    cart = [];
+    updateCartDisplay();
+  });
+});
+</script>
