@@ -89,8 +89,6 @@
           </div>
         </div>
 
-        <!-- Menu, Carrinho e Rodapé permanecem os mesmos -->
-
       </div>
     </div>
   </main>
@@ -100,5 +98,19 @@
       <p>&copy; 2023 Tubarões Famintos - Lanchonete Virtual</p>
     </div>
   </footer>
+
+  <script>
+    document.querySelectorAll('.user-select').forEach(button => {
+      button.addEventListener('click', () => {
+        const userName = button.dataset.name;
+        const userBalance = (Math.random() * 20).toFixed(2);
+
+        document.getElementById('welcomeMessage').textContent = `Bem-vindo, ${userName}!`;
+        document.getElementById('userBalance').textContent = userBalance;
+        document.getElementById('alertUserName').textContent = userName;
+        document.getElementById('productLimitsAlert').classList.remove('hidden');
+      });
+    });
+  </script>
 </body>
 </html>
