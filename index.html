@@ -91,29 +91,8 @@
           </svg>
           Produtos
         </h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="h-32 bg-yellow-100 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" />
-              </svg>
-            </div>
-            <div class="p-4">
-              <div class="flex justify-between items-center mb-1">
-                <h4 class="font-semibold text-lg">Amendoim</h4>
-                <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full">Estoque: 0/3</span>
-              </div>
-              <p class="text-gray-600 text-sm mb-3">Pacote de amendoim torrado</p>
-              <div class="flex justify-between items-center">
-                <span class="font-bold text-sky-700">R$ 1,00</span>
-                <button class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition">
-                  Adicionar
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Outros produtos viriam aqui -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="productList">
+          <!-- Produtos serão inseridos dinamicamente -->
         </div>
       </section>
     </div>
@@ -155,6 +134,59 @@
       adminBtn.classList.remove('bg-sky-700');
       userBtn.classList.add('bg-sky-700');
       userBtn.classList.remove('bg-sky-800');
+    });
+
+    // Inserção dos produtos
+    const products = [
+      {
+        name: 'Amendoim',
+        description: 'Pacote de amendoim torrado',
+        price: 'R$ 1,00',
+        stock: '0/3',
+        color: 'yellow'
+      },
+      {
+        name: 'Club Social',
+        description: 'Biscoito Club Social unidade',
+        price: 'R$ 1,00',
+        stock: '0/4',
+        color: 'yellow'
+      },
+      {
+        name: 'Moranguete',
+        description: 'Bala sabor morango',
+        price: 'R$ 1,00',
+        stock: '0/7',
+        color: 'rose'
+      }
+    ];
+
+    const productList = document.getElementById('productList');
+    products.forEach(p => {
+      const productCard = `
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <div class="h-32 bg-${p.color}-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-${p.color}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" />
+            </svg>
+          </div>
+          <div class="p-4">
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-semibold text-lg">${p.name}</h4>
+              <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full">Estoque: ${p.stock}</span>
+            </div>
+            <p class="text-gray-600 text-sm mb-3">${p.description}</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-sky-700">${p.price}</span>
+              <button class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition">
+                Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      productList.insertAdjacentHTML('beforeend', productCard);
     });
   </script>
 </body>
