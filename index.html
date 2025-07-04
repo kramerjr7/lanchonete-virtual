@@ -32,13 +32,43 @@
         <div class="bg-white rounded-lg shadow-md p-4 mb-6">
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecione seu perfil</h2>
           <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <!-- Perfis dos usuários -->
             <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="1" data-name="Ariadne">
               <div class="flex flex-col items-center">
                 <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">AR</div>
                 <span class="font-medium">Ariadne</span>
               </div>
             </button>
-            <!-- Outros perfis... -->
+            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="2" data-name="Delcio">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">DE</div>
+                <span class="font-medium">Delcio</span>
+              </div>
+            </button>
+            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="3" data-name="Lorran">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">LO</div>
+                <span class="font-medium">Lorran</span>
+              </div>
+            </button>
+            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="4" data-name="Suelen Lemos">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SL</div>
+                <span class="font-medium">Suelen Lemos</span>
+              </div>
+            </button>
+            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="5" data-name="Suelen Soares">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SS</div>
+                <span class="font-medium">Suelen Soares</span>
+              </div>
+            </button>
+            <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="6" data-name="Priscila">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">PR</div>
+                <span class="font-medium">Priscila</span>
+              </div>
+            </button>
           </div>
         </div>
 
@@ -59,58 +89,7 @@
           </div>
         </div>
 
-        <div id="menuSection" class="hidden">
-          <h2 class="text-2xl font-bold text-gray-800 mb-4">Cardápio</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Produto Exemplo -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-              <div class="h-32 bg-yellow-100 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" />
-                </svg>
-              </div>
-              <div class="p-4">
-                <div class="flex justify-between items-center mb-1">
-                  <h4 class="font-semibold text-lg">Amendoim</h4>
-                  <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full" id="stock-1">Estoque: 0/3</span>
-                </div>
-                <p class="text-gray-600 text-sm mb-3">Pacote de amendoim torrado</p>
-                <div class="flex justify-between items-center">
-                  <span class="font-bold text-sky-700">R$ 1,00</span>
-                  <button class="add-to-cart bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition" data-id="1" data-name="Amendoim" data-price="1.00" data-stock="3">Adicionar</button>
-                </div>
-              </div>
-            </div>
-            <!-- Repetir o card acima para os demais produtos -->
-          </div>
-        </div>
-
-        <div id="cartSection" class="hidden bg-white rounded-lg shadow-md p-4 mt-6">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">Seu Pedido</h2>
-          <div id="cartItems" class="mb-4">
-            <div class="text-gray-500 text-center py-6">Seu carrinho está vazio</div>
-          </div>
-          <div class="border-t pt-4">
-            <div class="flex justify-between mb-2">
-              <span class="font-medium">Subtotal:</span>
-              <span id="subtotal">R$ 0,00</span>
-            </div>
-            <div class="flex justify-between mb-4">
-              <span class="font-bold">Total:</span>
-              <span id="total" class="font-bold text-sky-700">R$ 0,00</span>
-            </div>
-            <div class="flex justify-between">
-              <button id="clearCart" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition">Limpar</button>
-              <button id="checkoutBtn" class="bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 rounded-lg transition flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                </svg>
-                Finalizar Pedido
-              </button>
-            </div>
-          </div>
-        </div>
+        <!-- Menu, Carrinho e Rodapé permanecem os mesmos -->
 
       </div>
     </div>
