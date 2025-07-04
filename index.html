@@ -83,10 +83,35 @@
               <h3 class="text-sm font-medium text-amber-800">Atenção: Produtos com limite por funcionário</h3>
               <div class="mt-2 text-sm text-amber-700">
                 <p>Olá <span id="alertUserName">funcionário</span>, lembre-se que os produtos possuem limites de quantidade por funcionário:</p>
-                <ul class="list-disc pl-5 mt-1 space-y-1" id="productLimitsList"></ul>
+                <ul class="list-disc pl-5 mt-1 space-y-1" id="productLimitsList">
+                  <li>1 Refrigerante</li>
+                  <li>1 Salgadinho</li>
+                  <li>1 Doce</li>
+                </ul>
               </div>
             </div>
           </div>
+        </div>
+
+        <div id="productSection" class="hidden bg-white rounded-lg shadow-md p-4">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Produtos disponíveis</h2>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <li class="border p-3 rounded-md">
+              <h3 class="text-lg font-bold">Refrigerante</h3>
+              <p class="text-gray-600">R$ 6,00</p>
+              <button class="mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700">Adicionar</button>
+            </li>
+            <li class="border p-3 rounded-md">
+              <h3 class="text-lg font-bold">Salgadinho</h3>
+              <p class="text-gray-600">R$ 5,00</p>
+              <button class="mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700">Adicionar</button>
+            </li>
+            <li class="border p-3 rounded-md">
+              <h3 class="text-lg font-bold">Doce</h3>
+              <p class="text-gray-600">R$ 3,00</p>
+              <button class="mt-2 bg-sky-600 text-white px-3 py-1 rounded hover:bg-sky-700">Adicionar</button>
+            </li>
+          </ul>
         </div>
 
       </div>
@@ -109,8 +134,10 @@
         document.getElementById('userBalance').textContent = userBalance;
         document.getElementById('alertUserName').textContent = userName;
         document.getElementById('productLimitsAlert').classList.remove('hidden');
+        document.getElementById('productSection').classList.remove('hidden');
       });
     });
   </script>
 </body>
 </html>
+
