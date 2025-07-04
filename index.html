@@ -1,193 +1,898 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lanchonete Virtual - Tubarões Famintos</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="favicon.ico" />
-</head>
-<body class="bg-blue-50 min-h-screen flex flex-col">
-  <!-- Navegação e logo -->
-  <header class="w-full text-center py-6">
-    <img src="logo.svg" alt="Logo Tubarões Famintos" class="mx-auto w-48 h-auto mb-2" />
-    <div class="flex justify-center space-x-4">
-      <button id="userBtn" class="bg-sky-800 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">
-        Funcionário
-      </button>
-      <button id="adminBtn" class="bg-sky-700 text-white px-4 py-2 rounded-lg hover:bg-sky-800 transition">
-        Admin
-      </button>
-    </div>
-  </header>
+  <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-6">
+        <!-- User View -->
+        <div id="userView" class="block">
+            <div class="mb-6">
+                <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800" id="welcomeMessage">Bem-vindo!</h2>
+                            <p class="text-gray-600">Selecione seu perfil para ver seu saldo</p>
+                        </div>
+                        <div class="bg-sky-100 text-sky-800 font-bold py-2 px-4 rounded-lg">
+                            Saldo: R$ <span id="userBalance">0,00</span>
+                        </div>
+                    </div>
+                </div>
 
-  <!-- Conteúdo principal -->
-  <main class="flex-grow container mx-auto px-4 py-6">
-    <!-- User View -->
-    <div id="userView">
-      <!-- Título e saldo -->
-      <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-        <div class="flex items-center justify-between">
-          <div>
-            <h2 class="text-xl font-semibold text-gray-800" id="welcomeMessage">Bem‑vindo!</h2>
-            <p class="text-gray-600">Selecione seu perfil para ver seu saldo</p>
-          </div>
-          <div class="bg-sky-100 text-sky-800 font-bold py-2 px-4 rounded-lg">
-            Saldo: R$ <span id="userBalance">0,00</span>
-          </div>
+                <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecione seu perfil</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="userSelectGrid">
+                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="1" data-name="Ariadne">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">AR</div>
+                                <span class="font-medium">Ariadne</span>
+                            </div>
+                        </button>
+                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="2" data-name="Delcio">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">DE</div>
+                                <span class="font-medium">Delcio</span>
+                            </div>
+                        </button>
+                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="3" data-name="Lorran">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">LO</div>
+                                <span class="font-medium">Lorran</span>
+                            </div>
+                        </button>
+                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="4" data-name="Suelen Lemos">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SL</div>
+                                <span class="font-medium">Suelen Lemos</span>
+                            </div>
+                        </button>
+                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="5" data-name="Suelen Soares">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SS</div>
+                                <span class="font-medium">Suelen Soares</span>
+                            </div>
+                        </button>
+                        <button class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="6" data-name="Priscila">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">PR</div>
+                                <span class="font-medium">Priscila</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Limits Alert -->
+                <div id="productLimitsAlert" class="hidden bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded-md">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-amber-800">Atenção: Produtos com limite por funcionário</h3>
+                            <div class="mt-2 text-sm text-amber-700">
+                                <p>Olá <span id="alertUserName">funcionário</span>, lembre-se que os produtos possuem limites de quantidade por funcionário:</p>
+                                <ul class="list-disc pl-5 mt-1 space-y-1" id="productLimitsList">
+                                    <!-- Product limits will be inserted here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="menuSection" class="hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Cardápio</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-sky-800 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                            </svg>
+                            Produtos
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <div class="h-32 bg-yellow-100 shark-bg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                        <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" />
+                                    </svg>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="font-semibold text-lg">Amendoim</h4>
+                                        <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full" id="stock-1">Estoque: 0/3</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">Pacote de amendoim torrado</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-sky-700">R$ 1,00</span>
+                                        <button class="add-to-cart bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition" data-id="1" data-name="Amendoim" data-price="1.00" data-stock="3">
+                                            Adicionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <div class="h-32 bg-yellow-100 shark-bg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                        <rect x="6" y="8" width="12" height="8" rx="1" stroke="currentColor" stroke-width="2" fill="none" />
+                                    </svg>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="font-semibold text-lg">Club Social</h4>
+                                        <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full" id="stock-2">Estoque: 0/4</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">Biscoito Club Social unidade</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-sky-700">R$ 1,00</span>
+                                        <button class="add-to-cart bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition" data-id="2" data-name="Club Social" data-price="1.00" data-stock="4">
+                                            Adicionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <div class="h-32 bg-red-100 shark-bg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                        <path d="M12,8 C14,8 16,10 16,12 C16,14 14,16 12,16 C10,16 8,14 8,12 C8,10 10,8 12,8 Z" stroke="currentColor" stroke-width="2" fill="none" />
+                                        <path d="M12,5 L12,7" stroke="currentColor" stroke-width="2" />
+                                    </svg>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="font-semibold text-lg">Moranguete</h4>
+                                        <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full" id="stock-3">Estoque: 0/7</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">Bala sabor morango</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-sky-700">R$ 1,00</span>
+                                        <button class="add-to-cart bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition" data-id="3" data-name="Moranguete" data-price="1.00" data-stock="7">
+                                            Adicionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <div class="h-32 bg-orange-100 shark-bg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                                    </svg>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="font-semibold text-lg">Paçoquinha</h4>
+                                        <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full" id="stock-4">Estoque: 0/8</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">Doce de amendoim tradicional</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-sky-700">R$ 1,00</span>
+                                        <button class="add-to-cart bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition" data-id="4" data-name="Paçoquinha" data-price="1.00" data-stock="8">
+                                            Adicionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <div class="h-32 bg-green-100 shark-bg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="font-semibold text-lg">Gominha</h4>
+                                        <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full" id="stock-5">Estoque: 0/5</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">Bala de goma sortida</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-sky-700">R$ 1,00</span>
+                                        <button class="add-to-cart bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition" data-id="5" data-name="Gominha" data-price="1.00" data-stock="5">
+                                            Adicionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <div class="h-32 bg-blue-100 shark-bg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                                    </svg>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="font-semibold text-lg">Coca Cola</h4>
+                                        <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full" id="stock-6">Estoque: 0/4</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">Lata 350ml</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-sky-700">R$ 1,20</span>
+                                        <button class="add-to-cart bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition" data-id="6" data-name="Coca Cola" data-price="1.20" data-stock="4">
+                                            Adicionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart -->
+                <div id="cartSection" class="hidden bg-white rounded-lg shadow-md p-4">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        Seu Pedido
+                    </h2>
+                    <div id="cartItems" class="mb-4">
+                        <div class="text-gray-500 text-center py-6">Seu carrinho está vazio</div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Subtotal:</span>
+                            <span id="subtotal">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between mb-4">
+                            <span class="font-bold">Total:</span>
+                            <span id="total" class="font-bold text-sky-700">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <button id="clearCart" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition">
+                                Limpar
+                            </button>
+                            <button id="checkoutBtn" class="bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 rounded-lg transition flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                                </svg>
+                                Finalizar Pedido
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <!-- Seleção de perfil -->
-      <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecione seu perfil</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-          <!-- Cada perfil -->
-          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="1" data-name="Ariadne">
-            <div class="flex flex-col items-center">
-              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">AR</div>
-              <span class="font-medium">Ariadne</span>
+        <!-- Admin View -->
+        <div id="adminView" class="hidden">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Painel Administrativo</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-sky-50 border border-sky-200 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold text-sky-800 mb-2">Total de Pedidos</h3>
+                        <p class="text-3xl font-bold text-sky-700" id="totalOrders">3</p>
+                        <p class="text-sm text-gray-500">Hoje</p>
+                    </div>
+                    <div class="bg-sky-50 border border-sky-200 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold text-sky-800 mb-2">Valor Total</h3>
+                        <p class="text-3xl font-bold text-sky-700" id="totalValue">R$ 6,20</p>
+                        <p class="text-sm text-gray-500">Hoje</p>
+                    </div>
+                    <div class="bg-sky-50 border border-sky-200 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold text-sky-800 mb-2">Vouchers Utilizados</h3>
+                        <p class="text-3xl font-bold text-sky-700">3/6</p>
+                        <p class="text-sm text-gray-500">Este mês</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Gerenciar Funcionários</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-sky-100">
+                                <tr>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">ID</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Nome</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Saldo</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Último Pedido</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200" id="employeeTable">
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">1</td>
+                                    <td class="py-3 px-4 text-sm">Ariadne</td>
+                                    <td class="py-3 px-4 text-sm">R$ 40,00</td>
+                                    <td class="py-3 px-4 text-sm">-</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 edit-user" data-id="1">Editar</button>
+                                        <button class="text-sky-600 hover:text-sky-800 generate-qr" data-id="1" data-name="Ariadne">QR Code</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">2</td>
+                                    <td class="py-3 px-4 text-sm">Delcio</td>
+                                    <td class="py-3 px-4 text-sm">R$ 40,00</td>
+                                    <td class="py-3 px-4 text-sm">15/05/2023</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 edit-user" data-id="2">Editar</button>
+                                        <button class="text-sky-600 hover:text-sky-800 generate-qr" data-id="2" data-name="Delcio">QR Code</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">3</td>
+                                    <td class="py-3 px-4 text-sm">Lorran</td>
+                                    <td class="py-3 px-4 text-sm">R$ 40,00</td>
+                                    <td class="py-3 px-4 text-sm">-</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 edit-user" data-id="3">Editar</button>
+                                        <button class="text-sky-600 hover:text-sky-800 generate-qr" data-id="3" data-name="Lorran">QR Code</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">4</td>
+                                    <td class="py-3 px-4 text-sm">Suelen Lemos</td>
+                                    <td class="py-3 px-4 text-sm">R$ 40,00</td>
+                                    <td class="py-3 px-4 text-sm">14/05/2023</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 edit-user" data-id="4">Editar</button>
+                                        <button class="text-sky-600 hover:text-sky-800 generate-qr" data-id="4" data-name="Suelen Lemos">QR Code</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">5</td>
+                                    <td class="py-3 px-4 text-sm">Suelen Soares</td>
+                                    <td class="py-3 px-4 text-sm">R$ 40,00</td>
+                                    <td class="py-3 px-4 text-sm">14/05/2023</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 edit-user" data-id="5">Editar</button>
+                                        <button class="text-sky-600 hover:text-sky-800 generate-qr" data-id="5" data-name="Suelen Soares">QR Code</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">6</td>
+                                    <td class="py-3 px-4 text-sm">Priscila</td>
+                                    <td class="py-3 px-4 text-sm">R$ 40,00</td>
+                                    <td class="py-3 px-4 text-sm">-</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 edit-user" data-id="6">Editar</button>
+                                        <button class="text-sky-600 hover:text-sky-800 generate-qr" data-id="6" data-name="Priscila">QR Code</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Controle de Estoque</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-sky-100">
+                                <tr>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">ID</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Produto</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Estoque Total</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Limite por Funcionário</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">1</td>
+                                    <td class="py-3 px-4 text-sm">Amendoim</td>
+                                    <td class="py-3 px-4 text-sm">20</td>
+                                    <td class="py-3 px-4 text-sm">3</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 restock-btn" data-id="1" data-name="Amendoim">Repor</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">2</td>
+                                    <td class="py-3 px-4 text-sm">Club Social</td>
+                                    <td class="py-3 px-4 text-sm">24</td>
+                                    <td class="py-3 px-4 text-sm">4</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 restock-btn" data-id="2" data-name="Club Social">Repor</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">3</td>
+                                    <td class="py-3 px-4 text-sm">Moranguete</td>
+                                    <td class="py-3 px-4 text-sm">46</td>
+                                    <td class="py-3 px-4 text-sm">7</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 restock-btn" data-id="3" data-name="Moranguete">Repor</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">4</td>
+                                    <td class="py-3 px-4 text-sm">Paçoquinha</td>
+                                    <td class="py-3 px-4 text-sm">50</td>
+                                    <td class="py-3 px-4 text-sm">8</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 restock-btn" data-id="4" data-name="Paçoquinha">Repor</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">5</td>
+                                    <td class="py-3 px-4 text-sm">Gominha</td>
+                                    <td class="py-3 px-4 text-sm">30</td>
+                                    <td class="py-3 px-4 text-sm">5</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 restock-btn" data-id="5" data-name="Gominha">Repor</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">6</td>
+                                    <td class="py-3 px-4 text-sm">Coca Cola</td>
+                                    <td class="py-3 px-4 text-sm">24</td>
+                                    <td class="py-3 px-4 text-sm">4</td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <button class="text-sky-600 hover:text-sky-800 mr-2 restock-btn" data-id="6" data-name="Coca Cola">Repor</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Histórico de Pedidos</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-sky-100">
+                                <tr>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">ID</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Funcionário</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Itens</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Valor</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold text-sky-800">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200" id="orderHistory">
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">#001</td>
+                                    <td class="py-3 px-4 text-sm">Delcio</td>
+                                    <td class="py-3 px-4 text-sm">Amendoim, Club Social</td>
+                                    <td class="py-3 px-4 text-sm">R$ 2,00</td>
+                                    <td class="py-3 px-4 text-sm">15/05/2023</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">#002</td>
+                                    <td class="py-3 px-4 text-sm">Suelen Lemos</td>
+                                    <td class="py-3 px-4 text-sm">Moranguete, Paçoquinha</td>
+                                    <td class="py-3 px-4 text-sm">R$ 2,00</td>
+                                    <td class="py-3 px-4 text-sm">14/05/2023</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm">#003</td>
+                                    <td class="py-3 px-4 text-sm">Suelen Soares</td>
+                                    <td class="py-3 px-4 text-sm">Gominha, Coca Cola</td>
+                                    <td class="py-3 px-4 text-sm">R$ 2,20</td>
+                                    <td class="py-3 px-4 text-sm">14/05/2023</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="2" data-name="Delcio">
-            <div class="flex flex-col items-center">
-              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">DE</div>
-              <span class="font-medium">Delcio</span>
-            </div>
-          </div>
-          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="3" data-name="Lorran">
-            <div class="flex flex-col items-center">
-              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">LO</div>
-              <span class="font-medium">Lorran</span>
-            </div>
-          </div>
-          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="4" data-name="Suelen Lemos">
-            <div class="flex flex-col items-center">
-              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SL</div>
-              <span class="font-medium">Suelen Lemos</span>
-            </div>
-          </div>
-          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="5" data-name="Suelen Soares">
-            <div class="flex flex-col items-center">
-              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">SS</div>
-              <span class="font-medium">Suelen Soares</span>
-            </div>
-          </div>
-          <div class="user-select bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 rounded-lg p-3 transition" data-id="6" data-name="Priscila">
-            <div class="flex flex-col items-center">
-              <div class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-700 font-bold text-xl mb-2">PR</div>
-              <span class="font-medium">Priscila</span>
-            </div>
-          </div>
         </div>
-      </div>
+    </main>
 
-      <!-- Cardápio de Produtos -->
-      <section>
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Cardápio</h2>
-        <h3 class="text-lg font-semibold text-sky-800 mb-3 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-          </svg>
-          Produtos
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="productList">
-          <!-- Produtos serão inseridos dinamicamente -->
+    <!-- Footer -->
+    <footer class="bg-sky-800 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 Tubarões Famintos - Lanchonete Virtual</p>
         </div>
-      </section>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Confirmar Pedido</h3>
+                <button id="closeCheckoutModal" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div>
+                <p class="mb-4">Seu pedido será processado e descontado do seu saldo de voucher.</p>
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-4 mb-4">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-medium">Saldo atual:</span>
+                        <span id="currentBalance">R$ 40,00</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-medium">Valor do pedido:</span>
+                        <span id="orderAmount">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between font-bold">
+                        <span>Saldo restante:</span>
+                        <span id="remainingBalance">R$ 40,00</span>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button id="cancelCheckout" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition mr-2">
+                        Cancelar
+                    </button>
+                    <button id="confirmCheckout" class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-lg transition">
+                        Confirmar Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Admin View -->
-    <div id="adminView" class="hidden">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Painel Administrativo</h2>
-      <p class="text-gray-500 text-center">(Conteúdo do admin aqui...)</p>
+    <!-- Order Confirmation Modal -->
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Pedido Confirmado!</h3>
+                <p class="text-gray-600 mb-4">Seu pedido foi registrado com sucesso.</p>
+                <p class="text-gray-600 mb-6">Número do pedido: <span id="orderNumber" class="font-semibold">#004</span></p>
+                <button id="closeConfirmationModal" class="bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 rounded-lg transition">
+                    Fechar
+                </button>
+            </div>
+        </div>
     </div>
-  </main>
 
-  <!-- Rodapé -->
-  <footer class="bg-sky-800 text-white py-4 mt-auto">
-    <div class="container mx-auto px-4 text-center">
-      <p>&copy; 2023 Tubarões Famintos - Lanchonete Virtual</p>
+    <!-- Limit Reached Modal -->
+    <div id="limitReachedModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-yellow-100 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Limite Atingido</h3>
+                <p class="text-gray-600 mb-6">Você já atingiu o limite de <span id="limitReachedProduct" class="font-semibold"></span> disponível para seu perfil.</p>
+                <button id="closeLimitReachedModal" class="bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 rounded-lg transition">
+                    Entendi
+                </button>
+            </div>
+        </div>
     </div>
-  </footer>
+</div>
 
-  <!-- Scripts -->
-  <script>
-    const userBtn  = document.getElementById('userBtn');
-    const adminBtn = document.getElementById('adminBtn');
-    const userView = document.getElementById('userView');
-    const adminView = document.getElementById('adminView');
+<script>
+    // Espera o DOM carregar completamente
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM carregado completamente");
+        
+        // Initialize data
+        const users = [
+            { id: 1, name: "Ariadne", balance: 40.00, lastOrder: null },
+            { id: 2, name: "Delcio", balance: 40.00, lastOrder: "15/05/2023" },
+            { id: 3, name: "Lorran", balance: 40.00, lastOrder: null },
+            { id: 4, name: "Suelen Lemos", balance: 40.00, lastOrder: "14/05/2023" },
+            { id: 5, name: "Suelen Soares", balance: 40.00, lastOrder: "14/05/2023" },
+            { id: 6, name: "Priscila", balance: 40.00, lastOrder: null }
+        ];
 
-    userBtn.addEventListener('click', () => {
-      userView.classList.remove('hidden');
-      adminView.classList.add('hidden');
-      userBtn.classList.add('bg-sky-800');
-      userBtn.classList.remove('bg-sky-700');
-      adminBtn.classList.add('bg-sky-700');
-      adminBtn.classList.remove('bg-sky-800');
+        // Initialize products with stock limits per user
+        const products = [
+            { id: 1, name: "Amendoim", price: 1.00, totalStock: 20, limitPerUser: 3 },
+            { id: 2, name: "Club Social", price: 1.00, totalStock: 24, limitPerUser: 4 },
+            { id: 3, name: "Moranguete", price: 1.00, totalStock: 46, limitPerUser: 7 },
+            { id: 4, name: "Paçoquinha", price: 1.00, totalStock: 50, limitPerUser: 8 },
+            { id: 5, name: "Gominha", price: 1.00, totalStock: 30, limitPerUser: 5 },
+            { id: 6, name: "Coca Cola", price: 1.20, totalStock: 24, limitPerUser: 4 }
+        ];
+
+        // Track user consumption
+        const userConsumption = {};
+        users.forEach(user => {
+            userConsumption[user.id] = {};
+            products.forEach(product => {
+                userConsumption[user.id][product.id] = 0;
+            });
+        });
+
+        let currentUser = null;
+        let cart = [];
+        let orderCount = 3; // Starting from #003
+        let totalSales = 6.20; // Initial total sales
+
+        // View switching
+        const userView = document.getElementById('userView');
+        const adminView = document.getElementById('adminView');
+        const userBtn = document.getElementById('userBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        const menuSection = document.getElementById('menuSection');
+        const cartSection = document.getElementById('cartSection');
+        const productLimitsAlert = document.getElementById('productLimitsAlert');
+
+        userBtn.addEventListener('click', function() {
+            userView.classList.remove('hidden');
+            adminView.classList.add('hidden');
+            userBtn.classList.add('bg-sky-800');
+            userBtn.classList.remove('bg-sky-700');
+            adminBtn.classList.add('bg-sky-700');
+            adminBtn.classList.remove('bg-sky-800');
+        });
+
+        adminBtn.addEventListener('click', function() {
+            userView.classList.add('hidden');
+            adminView.classList.remove('hidden');
+            adminBtn.classList.add('bg-sky-800');
+            adminBtn.classList.remove('bg-sky-700');
+            userBtn.classList.add('bg-sky-700');
+            userBtn.classList.remove('bg-sky-800');
+        });
+
+        // Update stock display for current user
+        function updateStockDisplay() {
+            if (!currentUser) return;
+            
+            products.forEach(product => {
+                const stockElement = document.getElementById(`stock-${product.id}`);
+                if (stockElement) {
+                    const consumed = userConsumption[currentUser.id][product.id];
+                    const remaining = product.limitPerUser - consumed;
+                    stockElement.textContent = `Estoque: ${consumed}/${product.limitPerUser}`;
+                    
+                    // Update button state based on stock
+                    const addButton = document.querySelector(`.add-to-cart[data-id="${product.id}"]`);
+                    if (remaining <= 0) {
+                        addButton.disabled = true;
+                        addButton.classList.add('bg-gray-400');
+                        addButton.classList.remove('bg-sky-600', 'hover:bg-sky-700');
+                        addButton.textContent = 'Limite atingido';
+                    } else {
+                        addButton.disabled = false;
+                        addButton.classList.remove('bg-gray-400');
+                        addButton.classList.add('bg-sky-600', 'hover:bg-sky-700');
+                        addButton.textContent = 'Adicionar';
+                    }
+                }
+            });
+        }
+
+        // Show product limits alert
+        function showProductLimitsAlert(userName) {
+            document.getElementById('alertUserName').textContent = userName;
+            
+            // Generate product limits list
+            const productLimitsList = document.getElementById('productLimitsList');
+            productLimitsList.innerHTML = '';
+            
+            products.forEach(product => {
+                const li = document.createElement('li');
+                li.textContent = `${product.name}: ${product.limitPerUser} unidades`;
+                productLimitsList.appendChild(li);
+            });
+            
+            // Show the alert
+            productLimitsAlert.classList.remove('hidden');
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                productLimitsAlert.classList.add('hidden');
+            }, 10000);
+        }
+
+        // User selection
+        const userSelects = document.querySelectorAll('.user-select');
+        console.log("Encontrados " + userSelects.length + " elementos de seleção de usuário");
+        
+        userSelects.forEach(button => {
+            button.addEventListener('click', function(e) {
+                console.log("Clique em usuário detectado");
+                const userId = parseInt(this.getAttribute('data-id'));
+                const userName = this.getAttribute('data-name');
+                
+                console.log("Usuário selecionado: " + userName + " (ID: " + userId + ")");
+                
+                // Find user
+                currentUser = users.find(user => user.id === userId);
+                
+                // Update UI
+                document.getElementById('welcomeMessage').textContent = `Bem-vindo, ${userName}!`;
+                document.getElementById('userBalance').textContent = currentUser.balance.toFixed(2).replace('.', ',');
+                
+                // Show menu and cart
+                menuSection.classList.remove('hidden');
+                cartSection.classList.remove('hidden');
+                
+                // Show product limits alert
+                showProductLimitsAlert(userName);
+                
+                // Reset cart
+                cart = [];
+                updateCart();
+                updateStockDisplay();
+            });
+        });
+
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (!currentUser) {
+                    alert('Por favor, selecione um funcionário primeiro.');
+                    return;
+                }
+
+                const id = parseInt(this.dataset.id);
+                const name = this.dataset.name;
+                const price = parseFloat(this.dataset.price);
+                
+                // Check user limit
+                const consumed = userConsumption[currentUser.id][id];
+                const product = products.find(p => p.id === id);
+                
+                if (consumed >= product.limitPerUser) {
+                    document.getElementById('limitReachedProduct').textContent = name;
+                    document.getElementById('limitReachedModal').classList.remove('hidden');
+                    return;
+                }
+                
+                // Check if item already in cart
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    // Check if adding one more would exceed limit
+                    if (consumed + existingItem.quantity + 1 > product.limitPerUser) {
+                        document.getElementById('limitReachedProduct').textContent = name;
+                        document.getElementById('limitReachedModal').classList.remove('hidden');
+                        return;
+                    }
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: id,
+                        name: name,
+                        price: price,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+            });
+        });
+
+        // Cart functionality
+        const clearCartBtn = document.getElementById('clearCart');
+        clearCartBtn.addEventListener('click', function() {
+            cart = [];
+            updateCart();
+        });
+
+        function updateCart() {
+            const cartItemsEl = document.getElementById('cartItems');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total');
+            
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = '<div class="text-gray-500 text-center py-6">Seu carrinho está vazio</div>';
+                subtotalEl.textContent = 'R$ 0,00';
+                totalEl.textContent = 'R$ 0,00';
+                return;
+            }
+            
+            let html = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                html += `
+                    <div class="flex justify-between items-center py-2 border-b">
+                        <div>
+                            <h4 class="font-medium">${item.name}</h4>
+                            <p class="text-sm text-gray-600">R$ ${item.price.toFixed(2).replace('.', ',')} x ${item.quantity}</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="font-medium mr-2">R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
+                            <button class="remove-item text-red-500 hover:text-red-700" data-id="${item.id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItemsEl.innerHTML = html;
+            subtotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            totalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    cart = cart.filter(item => item.id !== id);
+                    updateCart();
+                });
+            });
+        }
+
+        // Checkout functionality
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const checkoutModal = document.getElementById('checkoutModal');
+        const closeCheckoutModal = document.getElementById('closeCheckoutModal');
+        const cancelCheckout = document.getElementById('cancelCheckout');
+        const confirmCheckout = document.getElementById('confirmCheckout');
+        
+        checkoutBtn.addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio.');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            if (total > currentUser.balance) {
+                alert('Saldo insuficiente para realizar este pedido.');
+                return;
+            }
+            
+            document.getElementById('currentBalance').textContent = `R$ ${currentUser.balance.toFixed(2).replace('.', ',')}`;
+            document.getElementById('orderAmount').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            document.getElementById('remainingBalance').textContent = `R$ ${(currentUser.balance - total).toFixed(2).replace('.', ',')}`;
+            
+            checkoutModal.classList.remove('hidden');
+        });
+        
+        closeCheckoutModal.addEventListener('click', function() {
+            checkoutModal.classList.add('hidden');
+        });
+        
+        cancelCheckout.addEventListener('click', function() {
+            checkoutModal.classList.add('hidden');
+        });
+        
+        confirmCheckout.addEventListener('click', function() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Update user balance
+            currentUser.balance -= total;
+            document.getElementById('userBalance').textContent = currentUser.balance.toFixed(2).replace('.', ',');
+            
+            // Update user consumption
+            cart.forEach(item => {
+                userConsumption[currentUser.id][item.id] += item.quantity;
+            });
+            
+            // Update order count
+            orderCount++;
+            document.getElementById('orderNumber').textContent = `#00${orderCount}`;
+            
+            // Update total sales
+            totalSales += total;
+            document.getElementById('totalValue').textContent = `R$ ${totalSales.toFixed(2).replace('.', ',')}`;
+            
+            // Update last order date
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            const formattedDate = `${dd}/${mm}/${yyyy}`;
+            currentUser.lastOrder = formattedDate;
+            
+            // Close checkout modal and show confirmation
+            checkoutModal.classList.add('hidden');
+            document.getElementById('confirmationModal').classList.remove('hidden');
+            
+            // Reset cart
+            cart = [];
+            updateCart();
+            updateStockDisplay();
+        });
+        
+        // Close confirmation modal
+        document.getElementById('closeConfirmationModal').addEventListener('click', function() {
+            document.getElementById('confirmationModal').classList.add('hidden');
+        });
+        
+        // Close limit reached modal
+        document.getElementById('closeLimitReachedModal').addEventListener('click', function() {
+            document.getElementById('limitReachedModal').classList.add('hidden');
+        });
+
+        // Adiciona logs para depuração
+        console.log("Script inicializado com sucesso");
     });
-
-    adminBtn.addEventListener('click', () => {
-      adminView.classList.remove('hidden');
-      userView.classList.add('hidden');
-      adminBtn.classList.add('bg-sky-800');
-      adminBtn.classList.remove('bg-sky-700');
-      userBtn.classList.add('bg-sky-700');
-      userBtn.classList.remove('bg-sky-800');
-    });
-
-    // Inserção dos produtos
-    const products = [
-      {
-        name: 'Amendoim',
-        description: 'Pacote de amendoim torrado',
-        price: 'R$ 1,00',
-        stock: '0/3',
-        color: 'yellow'
-      },
-      {
-        name: 'Club Social',
-        description: 'Biscoito Club Social unidade',
-        price: 'R$ 1,00',
-        stock: '0/4',
-        color: 'yellow'
-      },
-      {
-        name: 'Moranguete',
-        description: 'Bala sabor morango',
-        price: 'R$ 1,00',
-        stock: '0/7',
-        color: 'rose'
-      }
-    ];
-
-    const productList = document.getElementById('productList');
-    products.forEach(p => {
-      const productCard = `
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-          <div class="h-32 bg-${p.color}-100 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-${p.color}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" />
-            </svg>
-          </div>
-          <div class="p-4">
-            <div class="flex justify-between items-center mb-1">
-              <h4 class="font-semibold text-lg">${p.name}</h4>
-              <span class="bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded-full">Estoque: ${p.stock}</span>
-            </div>
-            <p class="text-gray-600 text-sm mb-3">${p.description}</p>
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-sky-700">${p.price}</span>
-              <button class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded-lg transition">
-                Adicionar
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-      productList.insertAdjacentHTML('beforeend', productCard);
-    });
-  </script>
-</body>
-</html>
+</script>
